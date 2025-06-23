@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To DANGLONG</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* 页面主体样式 */
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* 设置背景图片 */
+            background-image: url('https://tencentcdna.production.link3.cc/user_create_images/link3_1735832133542/picsingle/1750680896458');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* 背景遮罩层，增加文字可读性 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        
+        /* 主容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* 导航卡片样式 - 使用毛玻璃效果 */
+        .navigation-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 导航标题样式 */
+        .navigation-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 资源按钮样式 */
+        .resource-button {
+            display: block;
+            padding: 10px 20px;
+            background: rgba(231, 76, 60, 0.8);
+            color: #ffffff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 10px auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 280px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        /* 资源按钮悬停效果 */
+        .resource-button:hover {
+            background: rgba(231, 76, 60, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 信息卡片样式 - 使用毛玻璃效果 */
+        .info-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            padding: 25px 15px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        /* 信息卡片头部样式 */
+        .info-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        /* 头像样式 */
+        .info-avatar {
+            width: clamp(50px, 15vw, 80px);
+            height: clamp(50px, 15vw, 80px);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(225, 240, 255, 0.5);
+            margin-right: 15px;
+        }
+        
+        /* 信息标题样式 */
+        .info-title {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        /* 信息表格样式 */
+        .info-table {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+        
+        /* 表格单元格样式 */
+        .info-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(238, 238, 238, 0.3);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        /* 表格第一列样式 */
+        .info-table td:first-child {
+            width: clamp(90px, 30vw, 120px);
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+        
+        /* 表格第二列样式 */
+        .info-table td:last-child {
+            color: #a8c7e7;
+            font-weight: 600;
+        }
+        
+        /* 表格最后一行样式 */
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* 社交图标链接样式 */
+        .social-icon-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            margin: 15px 8px 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 社交图标悬停效果 */
+        .social-icon-link:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 社交图标样式 */
+        .social-icon-link img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+        }
+        
+        /* 版权信息卡片样式 */
+        .copyright-card {
+            background: rgba(44, 62, 80, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            width: 100%;
+            max-width: 600px;
+            color: #ecf0f1;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            margin-bottom: 30px;
+        }
+        
+        /* 版权信息段落样式 */
+        .copyright-card p {
+            margin-bottom: 8px;
+        }
+        
+        /* 版权信息最后一段样式 */
+        .copyright-card p:last-child {
+            margin-bottom: 0;
+            font-size: 90%;
+            opacity: 0.9;
+        }
+        
+        /* 响应式设计 - 小屏幕适配 */
+        @media (max-width: 400px) {
+            .navigation-card, .info-card, .copyright-card {
+                padding: 20px 10px;
+            }
+            
+            .info-table td {
+                padding: 8px 5px;
+            }
+            
+            .info-table td:first-child {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面主容器 -->
+    <div class="container">
+        <!-- 导航卡片 -->
+        <div class="navigation-card">
+            <div class="navigation-title">
+                Welcome To 
+                <!-- 网站Logo -->
+                <img src="https://tencentcdna.production.link3.cc/user_create_images/link3_1735832133542/picsingle/1750681510647" 
+                     alt="DANGLONG Logo" 
+                     style="height: 1.5em; vertical-align: middle; margin-left: 5px;">
+            </div>
+            <!-- 资源链接按钮 -->
+            <a href="https://box.danglong512.top" class="resource-button" target="_blank">
+                📦DANGLONG的资源仓库
+            </a>
+            <a href="https://blog.danglong512.top" class="resource-button" target="_blank">
+                📔DANGLONG的网络笔记
+            </a>
+        </div>
+        
+        <!-- 个人信息卡片 -->
+        <div class="info-card">
+            <div class="info-header">
+                <!-- 个人头像 -->
+                <img src="https://tencentcdna.production.link3.cc/user_create_images/link3_1735832133542/picsingle/1749244469873" alt="DANGLONG头像" class="info-avatar">
+                <h2 class="info-title">DANGLONG</h2>
+            </div>
+            <!-- 个人联系方式表格 -->
+            <table class="info-table">
+                <tr>
+                    <td>QQ：</td>
+                    <td>3106931904</td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td><a href="mailto:danglong512@qq.com" style="color: #a8c7e7; text-decoration: none;">danglong512@qq.com</a></td>
+                </tr>
+            </table>
+            
+            <!-- 社交链接 -->
+            <div class="social-icon-group">
+                <a href="https://github.com/danglong1024" class="social-icon-link" target="_blank">
+                    <img src="https://ts3.tc.mm.bing.net/th/id/ODLS.b2099a11-ca12-45ce-bede-5df940e38a48?w=32&h=32&qlt=90&pcl=fffffc&o=6&cb=ircwebp1&pid=1.2" alt="GitHub图标">
+                </a>
+                <a href="https://t.me/danglong512" class="social-icon-link" target="_blank">
+                    <img src="https://ts2.tc.mm.bing.net/th/id/ODLS.7f7db240-7182-4968-b86c-096f60ae2068?w=32&h=32&qlt=96&pcl=fffffa&o=6&cb=ircwebp1&pid=1.2" alt="Telegram图标">
+                </a>
+            </div>
+        </div>
+        
+        <!-- 版权信息卡片 -->
+        <div class="copyright-card">
+            <p>2022-2025 BY DANGLONG | 
+               <!-- 萌ICP备案信息 -->
+               <a href="https://icp.gov.moe/?keyword=20251130" target="_blank" style="color: #ecf0f1; text-decoration: none;">
+                   <img src="https://icp.gov.moe/images/ico64.png" alt="萌ICP图标" style="height: 1em; margin-right: 5px; vertical-align: middle;">萌ICP备20251130号
+               </a>
+            </p>
+            <p>
+                <!-- CDN和SSL信息 -->
+                <img src="https://ts1.tc.mm.bing.net/th/id/ODLS.af0111fa-98fe-41ad-9310-be4b86cf7ace?w=32&h=32&qlt=90&pcl=fffffc&o=6&cb=ircwebp1&pid=1.2" alt="CDN图标" style="height: 1em; margin-right: 5px; vertical-align: middle;">
+                Cloudflare提供 CDN 服务
+                <img src="https://static.ipw.cn/icon/ssl-s4.svg" alt="SSL支持图标" style="height: 2em; margin-left: 8px; vertical-align: middle; margin-top: -3px; display: inline-block; transition: transform 0.3s ease;"> <!-- 向上调整3像素 -->
+            </p>
+        </div>
+    </div>
+</body>
+</html>
